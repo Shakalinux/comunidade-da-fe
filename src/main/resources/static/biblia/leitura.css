@@ -1,0 +1,206 @@
+body {
+    background-color: #f8f9fa;
+    background-image: url('https://www.transparenttextures.com/patterns/crossword.png');
+    font-family: 'Georgia', serif;
+    color: #333;
+    padding-top: 90px;
+}
+
+header {
+    background: linear-gradient(to right, #4a2c0b, #6b4e31);
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header a, header button {
+    color: #fff !important;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+header a:hover, header button:hover {
+    background: rgba(107, 78, 49, 0.2);
+    transform: translateY(-2px);
+}
+
+.page {
+    background: #fefefe;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin: 6rem auto 3rem auto;
+    border-radius: 12px;
+    max-width: 900px;
+    position: relative;
+}
+
+.page::before {
+    content: '✝';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #ffd700;
+    opacity: 0.3;
+}
+
+.page-column {
+    column-count: 2;
+    column-gap: 40px;
+    text-align: justify;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.top-controls h2 {
+    font-family: 'Playfair Display', serif;
+    color: #4a2c0b;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form-select {
+    border: 1px solid #6b4e31;
+    border-radius: 6px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background: #f8fafc;
+    transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    outline: none;
+}
+
+.user-avatar {
+    border: 3px solid #6b4e31;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+}
+
+.btn-outline-dark, .btn-dark {
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-outline-dark {
+    border-color: #4a2c0b;
+    color: #4a2c0b;
+}
+
+.btn-outline-dark:hover {
+    background: #6b4e31;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-dark {
+    background: #4a2c0b;
+    border-color: #4a2c0b;
+}
+
+.btn-dark:hover {
+    background: #6b4e31;
+    border-color: #6b4e31;
+    transform: translateY(-2px);
+}
+
+footer {
+    color: #6b4e31;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+.versiculo-linha {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.versiculo-texto {
+    flex: 1;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+.favorito-btn {
+    background: none;
+    border: none;
+    color: #b9a37b;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+    font-size: 1.1rem;
+    margin-top: 3px;
+}
+
+.favorito-btn:hover {
+    color: #d4a017;
+}
+
+.favorito-btn .material-symbols-outlined {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.favorito-ativo {
+    background-color: #fff8dc;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.verse-number {
+    font-weight: bold;
+    color: #6b4e31;
+    font-size: 0.9rem;
+    vertical-align: super;
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .page-column {
+        column-count: 1;
+    }
+
+    .page {
+        padding: 1.5rem;
+    }
+
+    .top-controls h2 {
+        font-size: 1.5rem;
+    }
+
+    .versiculo-linha {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}

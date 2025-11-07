@@ -1,0 +1,186 @@
+body {
+    background-color: #f8f9fa;
+    background-image: url('https://www.transparenttextures.com/patterns/crossword.png');
+    font-family: 'Georgia', serif;
+    padding-top: 90px;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(to right, #4a2c0b, #6b4e31);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+}
+
+header a, header button {
+    color: #fff !important;
+}
+
+.offcanvas {
+    background: #4a2c0b;
+}
+
+.offcanvas-header {
+    background: #3a1f07;
+    color: #fff;
+    border-bottom: 1px solid #6b4e31;
+    padding: 1rem;
+}
+
+.offcanvas-body a {
+    color: #fff;
+    padding: 0.75rem 1rem;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.offcanvas-body a:hover {
+    background-color: #6b4e31;
+    padding-left: 1.5rem;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.versiculo-dia {
+    background: #fff;
+    border-left: 4px solid #ffd700;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Playfair Display', serif;
+    color: #4a2c0b;
+    position: relative;
+}
+
+.versiculo-dia::before {
+    content: '✝';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #ffd700;
+    opacity: 0.3;
+}
+
+.versiculo-dia p {
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.versiculo-dia small {
+    color: #6b4e31;
+    font-weight: 400;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    filter: brightness(0.95);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    color: #4a2c0b;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6b4e31;
+}
+
+.btn-primary {
+    background: #4a2c0b;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #6b4e31;
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: #ffd700;
+    color: #4a2c0b;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-warning:hover {
+    background: #e6c200;
+    transform: translateY(-2px);
+}
+
+.form-control {
+    border: 1px solid #6b4e31;
+    border-radius: 6px;
+    background: #f8fafc;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+h1, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #4a2c0b;
+    font-weight: 700;
+}
+
+h1.h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+h3.h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.bg-white {
+    background: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.container {
+    max-width: 1200px;
+}

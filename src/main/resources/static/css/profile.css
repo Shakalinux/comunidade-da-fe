@@ -1,0 +1,187 @@
+body {
+    background-color: #f8f9fa;
+    background-image: url('https://www.transparenttextures.com/patterns/crossword.png');
+    font-family: 'Georgia', serif;
+    padding-top: 90px;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(to right, #4a2c0b, #6b4e31);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+}
+
+.offcanvas {
+    background: #4a2c0b;
+}
+
+.offcanvas-header {
+    background: #3a1f07;
+    color: #fff;
+    border-bottom: 1px solid #6b4e31;
+    padding: 1rem;
+}
+
+.offcanvas-body a {
+    color: #fff;
+    padding: 0.75rem 1rem;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+
+
+.profile-info, .stats {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h1, h2, h5, .form-label {
+    color: #4a2c0b;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: #4a2c0b;
+    border-color: #4a2c0b;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #6b4e31;
+    border-color: #6b4e31;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #6b4e31;
+    border-color: #6b4e31;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #8c6b47;
+    border-color: #8c6b47;
+    transform: translateY(-2px);
+}
+
+.stat-card {
+    border: 1px solid #6b4e31;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.text-muted {
+    color: #6b4e31 !important;
+    font-size: 0.9rem;
+}
+
+.profile-imagem-primary {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.profile-imagem-primary img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    filter: brightness(0.95);
+}
+
+.profile-imagem-primary.hidden img {
+    max-height: 0;
+    opacity: 0;
+}
+
+.profile-info img.rounded-circle {
+    object-fit: cover;
+    border: 3px solid #6b4e31;
+    transition: transform 0.3s ease;
+}
+
+.profile-info img.rounded-circle:hover {
+    transform: scale(1.05);
+}
+
+.modal-body input.form-control {
+    margin-bottom: 1rem;
+    border: 1px solid #6b4e31;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.modal-body input.form-control:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.openbtn {
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.openbtn:hover {
+    background-color: rgba(107, 78, 49, 0.2);
+}
+
+
+
+.card-reading {
+    transition: transform 0.2s;
+}
+.card-reading:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.progress {
+    height: 22px;
+    border-radius: 12px;
+    background-color: #e9ecef;
+}
+.progress-bar {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

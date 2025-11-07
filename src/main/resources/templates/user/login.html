@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar no Caminho da Fé</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body class="bg-light">
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+        <h2 class="text-center mb-3">Entrar no Caminho da Fé</h2>
+        <p class="text-center text-muted mb-4">
+            "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei." (Mateus 11:28)
+        </p>
+
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div th:if="${info}" class="alert alert-info" th:text="${info}"></div>
+
+        <div th:if="${param.logout}" class="alert alert-success">Você foi desconectado com sucesso!</div>
+        <div th:if="${param.error}" class="alert alert-danger">Usuário ou senha inválidos. Tente novamente.</div>
+
+        <form th:action="@{/user/login}" method="POST">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="mb-3">
+                <label for="loginName" class="form-label">Nome de Usuário</label>
+                <input type="text" class="form-control" id="loginName" name="username"
+                       required placeholder="Digite seu nome de usuário">
+            </div>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="loginPassword" name="password"
+                       required placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-success w-100">Entrar na Comunidade</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a th:href="@{/user/cadastro}">Ainda não faz parte? Junte-se à comunidade</a>
+            <br>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalRedefinirSenha" class="text-muted small">
+                Esqueceu a senha?
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalRedefinirSenha" tabindex="-1" aria-labelledby="modalRedefinirSenhaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-sm">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalRedefinirSenhaLabel">Redefinir Senha</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="step1">
+                    <p class="text-muted small mb-3 text-center">
+                        Digite seu e-mail cadastrado. Enviaremos um código para redefinir sua senha.
+                    </p>
+
+                    <form id="forgotForm" th:action="@{/user/forgot-password}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                   required placeholder="Seu e-mail cadastrado">
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Enviar código</button>
+                    </form>
+                </div>
+
+                <div id="step2" style="display:none;">
+                    <p class="text-muted small mb-3 text-center">
+                        Insira o código de 6 dígitos que enviamos para o seu e-mail e a sua nova senha.
+                    </p>
+
+                    <form id="resetForm" th:action="@{/user/reset-password-modal}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <input type="hidden" id="resetUsername" name="username" value="">
+
+                        <div class="mb-3">
+                            <label for="code" class="form-label">Código</label>
+                            <input type="text" id="code" name="code" class="form-control"
+                                   required placeholder="Código de 6 dígitos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Nova Senha</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   required placeholder="Mínimo 6 caracteres">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm" class="form-label">Confirme a Nova Senha</label>
+                            <input type="password" id="confirm" name="confirm" class="form-control"
+                                   required placeholder="Confirme sua nova senha">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Redefinir Senha</button>
+                    </form>
+                </div>
+
+                <div id="modalMessage" class="text-center mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    const modalRedefinirSenha = new bootstrap.Modal(document.getElementById('modalRedefinirSenha'));
+
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const modalMessage = document.getElementById("modalMessage");
+    const resetUsernameInput = document.getElementById("resetUsername");
+
+    document.getElementById("forgotForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const data = new FormData(form);
+
+        modalMessage.innerHTML = "<div class='text-center text-secondary'>Enviando código...</div>";
+
+        fetch(form.action, {
+            method: "POST",
+            body: data,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+
+                    step1.style.display = "none";
+                    step2.style.display = "block";
+                    resetUsernameInput.value = data.username;
+                    modalMessage.innerHTML = `<div class='alert alert-success mt-2'>${data.message}</div>`;
+                } else {
+
+                    modalMessage.innerHTML = `<div class='alert alert-danger mt-2'>${data.message}</div>`;
+                }
+            })
+            .catch(() => {
+                modalMessage.innerHTML = "<div class='alert alert-danger mt-2'>Erro na comunicação com o servidor. Tente novamente.</div>";
+            });
+    });
+
+
+    document.getElementById("resetForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const data = new FormData(form);
+
+        modalMessage.innerHTML = "<div class='text-center text-secondary'>Redefinindo senha...</div>";
+
+        fetch(form.action, {
+            method: "POST",
+            body: data,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+
+                    modalRedefinirSenha.hide();
+
+                    window.location.href = `/user/login?success=${encodeURIComponent(data.message)}`;
+                } else {
+
+                    modalMessage.innerHTML = `<div class='alert alert-danger mt-2'>${data.message}</div>`;
+                }
+            })
+            .catch(() => {
+                modalMessage.innerHTML = "<div class='alert alert-danger mt-2'>Erro na comunicação. Tente novamente.</div>";
+            });
+    });
+
+
+    document.getElementById('modalRedefinirSenha').addEventListener('hidden.bs.modal', function () {
+        step1.style.display = "block";
+        step2.style.display = "none";
+        modalMessage.innerHTML = "";
+        document.getElementById("forgotForm").reset();
+        document.getElementById("resetForm").reset();
+    });
+</script>
+
+</body>
+</html>
