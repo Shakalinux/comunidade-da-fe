@@ -4,122 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca da Fé</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Georgia&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/biblia/biblioteca.css}">
 </head>
-<body class="bg-light">
+<body>
+
 <div class="container-fluid p-0">
 
-    <header class="d-flex justify-content-between align-items-center py-3 bg-dark text-white fixed-top px-3">
-        <button class="btn text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu">
-            <span class="material-symbols-outlined">menu</span>
+    <header class="d-flex justify-content-between align-items-center py-3 fixed-top px-4">
+        <button class="btn text-white fs-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu">
+            <span class="material-symbols-rounded">menu</span>
         </button>
-        <a th:href="@{/profile}" class="d-flex align-items-center text-decoration-none text-white">
-            <img class="rounded-circle"
+        <a th:href="@{/profile}" class="d-flex align-items-center text-decoration-none">
+            <img class="rounded-circle border border-4 border-warning shadow-lg"
                  th:src="'data:image/jpeg;base64,' + ${profile.avatar64}"
-                 alt="Foto de Perfil"
-                 style="width: 30px; height: 30px; border: 2px solid #fff;"
-                 onerror="this.src='https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=740';">
+                 style="width: 50px; height: 50px; object-fit: cover;" alt="Perfil"
+                 onerror="this.src='https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=740';"
+            >
         </a>
     </header>
 
-    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="menu" aria-labelledby="menuLabel">
-        <div class="offcanvas-header text-center ">
-            <h5 id="menuLabel " class="text-white">Caminho da Fé</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    <div class="offcanvas offcanvas-start text-white" tabindex="-1" id="menu">
+        <div class="offcanvas-header justify-content-center border-bottom border-warning border-3">
+            <h5 class="fw-bold" style="font-family: 'Cinzel', serif; color: var(--gold);">Caminho da Fé</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body custom-offcanvas">
-            <a th:href="@{/biblia/inicio}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">home</span> <span class="text">Início</span>
+        <div class="offcanvas-body pt-4">
+            <a th:href="@{/biblia/inicio}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">home</span> Início
             </a>
-            <a th:href="@{/estudos/salvos}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">book</span> <span class="text">Estudos Salvos</span>
+            <a th:href="@{/estudos/biblicos}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">auto_stories</span> Estudos Bíblicos
             </a>
-            <a th:href="@{/estudos/biblicos}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">book_online</span> <span class="text">Estudos Bíblicos</span>
+            <a th:href="@{/estudos/salvos}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">bookmark</span> Estudos Salvos
             </a>
-            <a th:href="@{/favorites}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">star</span> <span class="text">Versículos Favoritos</span>
+            <a th:href="@{/favorites}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">favorite</span> Favoritos
             </a>
-            <a th:href="@{/biblia/biblioteca}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">bookmark</span> <span class="text">Biblioteca da Fé</span>
+            <a th:href="@{/biblia/biblioteca}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">library_books</span> Biblioteca da Fé
             </a>
-            <a th:href="@{/profile}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">person</span> <span class="text">Meu Perfil</span>
+            <a th:href="@{/comunidade/chat-online}" class="d-block text-white text-decoration-none active">
+                <span class="material-symbols-rounded">chat</span> Conversas
             </a>
-            <a href="#" class="d-block py-2 text-white text-decoration-none" onclick="document.getElementById('logoutForm').submit()">
-                <span class="material-symbols-outlined">logout</span> <span class="text">Sair</span>
+            <a th:href="@{/profile}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">person</span> Meu Perfil
+                <span th:if="${unreadMessagesCount != null and unreadMessagesCount > 0}"
+                      class="badge text-bg-danger rounded-pill ms-2"
+                      th:text="${unreadMessagesCount}">
+                </span>
             </a>
-
-            <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            </form>
+            <hr class="border-secondary">
+            <a href="#" class="d-block text-danger text-decoration-none" onclick="document.getElementById('logoutForm').submit()">
+                <span class="material-symbols-rounded">logout</span> Sair
+            </a>
         </div>
     </div>
 
 
-    <div class="container mt-5 pt-5">
 
-        <div class="d-flex mb-4 align-items-center">
-            <form th:action="@{/biblioteca/buscar}" method="get" class="d-flex me-2" style="width: 250px;">
-                <input type="text" name="termo" class="form-control form-control-sm me-1" placeholder="Buscar livro..." required>
-                <button type="submit" class="btn btn-sm btn-primary">Pesquisar</button>
+
+    <div class="verse-floating shadow-lg" id="cardVersiculoDia" style="display: none;">
+        <p id="textoVersiculo" class="mb-2 fst-italic fw-bold" style="color: var(--brown);"></p>
+        <small id="referenciaVersiculo" class="text-gold"></small>
+    </div>
+
+    <div class="container mt-5">
+
+
+        <div class="search-hero mx-auto mb-5" style="max-width: 800px;" data-aos="fade-down">
+            <form th:action="@{/biblia/biblioteca/buscar}" method="get" class="d-flex">
+                <input type="text" name="termo" class="form-control form-control-lg rounded-pill me-3 shadow-sm"
+                       placeholder="Buscar livro" required autofocus>
+                <button type="submit" class="btn btn-warning btn-lg rounded-pill px-5 shadow-lg">
+                    <span class="material-symbols-rounded">search</span>
+                </button>
             </form>
-
+            <div th:if="${#lists.isEmpty(livros)}" class="alert alert-warning text-center mt-4 fs-5">
+                Nenhum livro encontrado para "<strong th:text="${termoBuscado}"></strong>".
+            </div>
         </div>
 
-        <div class="versiculo-dia " id="cardVersiculoDia" style="display: none;">
-            <p id="textoVersiculo">Versículo do dia</p>
-            <small id="referenciaVersiculo">Livro Capítulo:Versículo</small>
-        </div>
 
-        <div class="bg-white p-4 rounded shadow-sm mb-5">
-            <h1 class="h2 mb-4">Últimas Leituras</h1>
-            <div class="row g-3">
-                <div class="col-6 col-md-3 col-lg-2" th:each="livro : ${ultimasLeituras}">
-                    <div class="card shadow-sm rounded text-center">
-                        <img th:src="@{|/img/books/${livro.id}.jpg|}"
-
-                             class="card-img-top"
-                             alt="Imagem do Livro">
-                        <div class="card-body">
-                            <h6 class="card-title" th:text="${livro.nome}">Título do Livro</h6>
-                            <p class="card-text text-muted mb-2" th:text="${livro.testamento.nome}"></p>
+        <div class="mb-5" data-aos="fade-up">
+            <h2 class="section-title">Últimas Leituras</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-md-4 col-lg-3" th:each="livro : ${ultimasLeituras}">
+                    <div class="book-card h-100"
+                         th:attr="data-aos='zoom-in', data-aos-delay=${livroStat.count * 100}"
+                         th:style="'--cover-color:' + (${livro.testamento.nome} == 'Antigo Testamento' ? '#c19a6b' : '#5c6bc0')">
+                        <div class="book-cover d-flex align-items-center justify-content-center">
+                            <div class="text-center text-white">
+                                <div class="book-letter" th:text="${#strings.substring(livro.nome, 0, 1)}">G</div>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5 class="fw-bold" th:text="${livro.nome}">Gênesis</h5>
+                            <p class="text-muted small" th:text="${livro.testamento.nome}">Antigo Testamento</p>
                             <a th:href="|/biblia/leitura/${livro.id}/1?versaoId=1|"
-                               class="btn btn-primary btn-sm">Leia agora</a>
+                               class="btn btn-read mt-3">
+                                <span class="material-symbols-rounded me-2">menu_book</span>
+                                Continuar Lendo
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white p-4 rounded shadow-sm mb-5">
-            <h3 class="h4 mb-4">Novas Leituras</h3>
-            <div class="row g-3">
-                <div class="col-6 col-md-3 col-lg-2" th:each="livro : ${livros}">
-                    <div class="card shadow-sm rounded text-center">
-                        <img th:src="@{|/img/books/${livro.id}.jpg|}"
 
-                             class="card-img-top"
-                             alt="Imagem do Livro">
-                        <div class="card-body">
-                            <h6 class="card-title" th:text="${livro.nome}">Título do Livro</h6>
-                            <p class="card-text text-muted mb-2" th:text="${livro.testamento.nome}"></p>
+        <div data-aos="fade-up" data-aos-delay="300">
+            <h2 class="section-title">Explorar a Palavra</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-md-4 col-lg-3" th:each="livro : ${livros}">
+                    <div class="book-card h-100"
+                         th:attr="data-aos='zoom-in', data-aos-delay=${livroStat.count * 50}"
+                         th:style="'--cover-color:' + (${livro.testamento.nome} == 'Antigo Testamento' ? '#c19a6b' : '#5c6bc0')">
+                        <div class="book-cover d-flex align-items-center justify-content-center">
+                            <div class="text-center text-white">
+                                <div class="book-letter" th:text="${#strings.substring(livro.nome, 0, 1)}">M</div>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5 class="fw-bold" th:text="${livro.nome}">Mateus</h5>
+                            <p class="text-muted small" th:text="${livro.testamento.nome}">Novo Testamento</p>
                             <a th:href="|/biblia/leitura/${livro.id}/1?versaoId=1|"
-                               class="btn btn-primary btn-sm">Leia agora</a>
+                               class="btn btn-read mt-3">
+                                <span class="material-symbols-rounded me-2">auto_stories</span>
+                                Ler Agora
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
     </div>
+
+
+    <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+    document.addEventListener("DOMContentLoaded", function() {
+        const verse = { texto: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito...", ref: "João 3:16" };
+        if (verse.texto) {
+            document.getElementById("cardVersiculoDia").style.display = "block";
+            document.getElementById("textoVersiculo").textContent = verse.texto;
+            document.getElementById("referenciaVersiculo").textContent = verse.ref;
+        }
+    });
+</script>
+
 </body>
 </html>

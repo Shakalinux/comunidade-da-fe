@@ -2,11 +2,9 @@ package com.shakalinux.biblia.controller;
 
 import com.shakalinux.biblia.model.*;
 import com.shakalinux.biblia.repository.EstudoRepository;
+import com.shakalinux.biblia.repository.MessageRepository;
 import com.shakalinux.biblia.repository.UserRepository;
-import com.shakalinux.biblia.service.AcessService;
-import com.shakalinux.biblia.service.ProfileService;
-import com.shakalinux.biblia.service.UserService;
-import com.shakalinux.biblia.service.LeituraUsuarioService;
+import com.shakalinux.biblia.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -46,6 +44,11 @@ public class ProfileController {
   @Autowired
   private EstudoRepository estudoRepository;
 
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
+    private PostService postService;
 
 
   @GetMapping
@@ -54,11 +57,14 @@ public class ProfileController {
     String username = auth.getName();
     User user = userRepository.findByUsername(username);
 
+
     if (user == null) {
       model.addAttribute("error", "Usuário não encontrado.");
       return "error";
     }
         acessService.registrarAcessoDiario(user);
+      long unreadMessagesCount = messageService.countUnreadMessages(username);
+      model.addAttribute("unreadMessagesCount", unreadMessagesCount);
 
     Profile profile = profileService.findByUser(user);
     if (profile == null) {
@@ -81,6 +87,7 @@ public class ProfileController {
 
     List<LeituraUsuario> ultimasLeituras = leituraUsuarioService.getTop3UltimasLeituras(user);
     model.addAttribute("ultimasLeituras", ultimasLeituras);
+    model.addAttribute("QTpostagens", postService.contarPostagensDoUsuario(user.getId()));
 
 
     long completedTasks = 0L;

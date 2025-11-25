@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificação de Conta</title>
-
+    <title>Verificação de Conta - Caminho da Fé</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/verificador.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cadastro.css}">
+
 </head>
 <body>
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="col-md-6">
 
-        <h2 class="mb-3 text-center">Verifique sua conta</h2>
-        <p class="text-center text-muted">Um código foi enviado para seu e-mail. Digite abaixo para ativar sua conta.</p>
+<div id="particles-js"></div>
+
+<div class="verify-container">
+    <div class="verify-card" data-aos="fade-up" data-aos-duration="1400">
+        <h2>Verifique sua conta</h2>
+        <p class="text-muted">
+            Um código foi enviado para seu e-mail. Digite abaixo para ativar sua conta.
+        </p>
 
         <div th:if="${success != null}" class="alert alert-success" role="alert">
             <p th:text="${success}"></p>
@@ -27,10 +34,10 @@
             <p th:text="${info}"></p>
         </div>
 
-        <form th:action="@{/user/verify}" method="post" class="mt-3">
+        <form th:action="@{/user/verify}" method="post" class="mt-4">
             <input type="hidden" name="username" th:value="${username}" />
 
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="code" class="form-label">Código de Verificação</label>
                 <input type="text"
                        class="form-control"
@@ -38,23 +45,55 @@
                        name="code"
                        required
                        maxlength="6"
-                       placeholder="Digite o código recebido">
+                       placeholder="••••••"
+                       autocomplete="off">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Ativar Conta</button>
+            <button type="submit" class="btn btn-verify w-100">
+                Ativar Conta
+            </button>
         </form>
 
-        <form th:action="@{/user/resend-verification}" method="post" class="mt-3 text-center">
+        <form th:action="@{/user/resend-verification}" method="post" class="mt-4 text-center">
             <input type="hidden" name="username" th:value="${username}" />
-            <button type="submit" class="btn btn-link">Reenviar código de verificação</button>
+            <button type="submit" class="btn btn-link p-0">
+                Reenviar código de verificação
+            </button>
         </form>
 
-        <div class="text-center mt-3">
-            <a th:href="@{/user/login}" class="text-decoration-none">Voltar para login</a>
+        <div class="text-center mt-4">
+            <a th:href="@{/user/login}" class="text-decoration-none">
+                Voltar para login
+            </a>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+    AOS.init({ duration: 1400, once: true });
+
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 85 },
+            color: { value: "#d4a017" },
+            size: { value: 3 },
+            move: { speed: 0.5 },
+            opacity: { value: 0.7, random: true },
+            line_linked: { enable: false }
+        },
+        interactivity: {
+            events: { onhover: { enable: true, mode: "bubble" } },
+            modes: { bubble: { distance: 150, size: 6, duration: 2, opacity: 0.9 } }
+        }
+    });
+
+    // Foco automático no campo de código
+    document.getElementById('code').focus();
+</script>
+
 </body>
 </html>

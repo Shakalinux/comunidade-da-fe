@@ -1,9 +1,11 @@
 package com.shakalinux.biblia.service;
 
+import com.shakalinux.biblia.model.Post;
 import com.shakalinux.biblia.model.Profile;
 import com.shakalinux.biblia.model.User;
 import com.shakalinux.biblia.model.VersiculoSalvo;
 import com.shakalinux.biblia.repository.EstudoRepository;
+import com.shakalinux.biblia.repository.PostRepository;
 import com.shakalinux.biblia.repository.ProfileRepository;
 import com.shakalinux.biblia.repository.VersiculoSalvoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class ProfileService {
 
     @Autowired
     private EstudoRepository estudoRepository;
+
+
 
     public List<Profile> listAllProfile() {
         return profileRepository.findAll();
@@ -68,12 +72,12 @@ public class ProfileService {
 
         versiculos = versiculoSalvoRepository.findByUser(user);
 
-        if (versiculos != null){
-            return versiculos;
-        }else{
-            return null;
-        }
+        return versiculos;
     }
+
+
+
+
 
 
 

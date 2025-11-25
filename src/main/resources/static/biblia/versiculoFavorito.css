@@ -16,6 +16,19 @@ header {
     background-color: var(--color-brown-dark) !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+.header-avatar {
+     position: relative;
+     display: inline-block;
+ }
+.header-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 3px solid var(--halo);
+    border-radius: 50%;
+    animation: halo 4s ease-in-out infinite;
+    pointer-events: none;
+}
 .offcanvas {
     background-color: var(--color-brown-dark) !important;
 }

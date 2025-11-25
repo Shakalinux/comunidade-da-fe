@@ -68,5 +68,16 @@ public class UserService {
         }
         return user;
     }
+    public List<User> listAllUsersWithEncodedProfiles() {
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            if (user.getProfile() != null) {
+                profileService.encodeImages(user.getProfile());
+            }
+        }
+
+        return users;
+    }
+
 
 }

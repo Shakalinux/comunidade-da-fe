@@ -52,5 +52,10 @@ public class User {
     @JsonIgnore
     private List<VersiculoSalvo> versiculosSalvos;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Post> posts;
+
+
 
 }

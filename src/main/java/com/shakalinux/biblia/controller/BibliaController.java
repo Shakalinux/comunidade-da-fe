@@ -149,6 +149,26 @@ public class BibliaController {
         return "home";
     }
 
+
+    @GetMapping("/biblioteca/buscar")
+    @PreAuthorize("isAuthenticated()")
+    public String buscarLivros(@RequestParam("termo") String termo, Model model) {
+        User usuario = userService.getLoggedInUser();
+        if (usuario == null) return "redirect:/user/login";
+
+        Profile profile = usuario.getProfile();
+        model.addAttribute("profile", profile);
+
+        List<Livro> resultados = bibliaService.buscarLivrosPorNome(termo);
+
+        model.addAttribute("livros", resultados);
+        model.addAttribute("ultimasLeituras", bibliaService.getUltimasLeituras(usuario.getUsername()));
+        model.addAttribute("termoBuscado", termo);
+
+        return "pageBiblia/biblioteca";
+    }
+
+
 }
 
 

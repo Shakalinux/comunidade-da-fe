@@ -1,187 +1,133 @@
+:root {
+    --gold: #d4a017;
+    --gold-dark: #b8860b;
+    --brown: #4e342e;
+    --cream: #fff8e1;
+    --light: #fffaf3;
+    --glass: rgba(255, 255, 255, 0.25);
+    --shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    --halo: rgba(212, 160, 23, 0.6);
+}
+* { scroll-behavior: smooth; }
+
 body {
-    background-color: #f8f9fa;
-    background-image: url('https://www.transparenttextures.com/patterns/crossword.png');
-    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #fdf6e3 0%, #ffe8c2 100%);
+    font-family: 'Nunito', sans-serif;
+    color: #3e2723;
+    min-height: 100vh;
+    background-attachment: fixed;
     padding-top: 90px;
-    color: #333;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed; inset: 0;
+    z-index: -1; opacity: 0.25;
 }
 
 header {
-    background: linear-gradient(to right, #4a2c0b, #6b4e31);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 0.5rem 1rem;
+    backdrop-filter: blur(16px);
+    background: rgba(78, 52, 46, 0.93);
+    border-bottom: 2px solid rgba(212, 160, 23, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+.header-avatar {
+    position: relative;
+    display: inline-block;
+}
+.header-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 3px solid var(--halo);
+    border-radius: 50%;
+    animation: halo 4s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .offcanvas {
-    background: #4a2c0b;
+    background: linear-gradient(180deg, #3e2723 0%, #2c1a0f 100%);
+    width: 300px !important;
+    border-right: 4px solid var(--gold);
+}
+.offcanvas a {
+    border-radius: 16px; margin: 10px 15px; padding: 16px 20px !important;
+    font-weight: 600; transition: all 0.4s ease;
+}
+.offcanvas a:hover {
+    background: var(--gold); color: #2c1a0f !important; transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(212,160,23,0.4);
 }
 
-.offcanvas-header {
-    background: #3a1f07;
-    color: #fff;
-    border-bottom: 1px solid #6b4e31;
-    padding: 1rem;
+.profile-banner {
+    position: relative; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);
+    margin-bottom: -80px; z-index: 2; transition: all 0.6s ease;
 }
+.profile-banner img {
+    width: 100%; height: 320px; object-fit: cover; transition: transform 0.6s ease; }
+.profile-banner:hover img { transform: scale(1.05); }
+.profile-banner::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(212,160,23,0.3), transparent 50%); }
 
-.offcanvas-body a {
-    color: #fff;
-    padding: 0.75rem 1rem;
-    transition: background 0.3s ease, padding-left 0.3s ease;
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
+.profile-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 3rem 2rem 2rem;
+    margin-top: 80px;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(212,160,23,0.3);
+    position: relative;
 }
-
-
-
-.profile-info, .stats {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+.avatar-container { position: relative; display: inline-block; }
+.avatar-halo {
+    position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px;
+    border: 4px solid var(--halo); border-radius: 50%;
+    animation: halo 4s ease-in-out infinite; box-shadow: 0 0 40px var(--halo);
 }
-
-h1, h2, h5, .form-label {
-    color: #4a2c0b;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-}
-
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.btn-primary {
-    background-color: #4a2c0b;
-    border-color: #4a2c0b;
-    border-radius: 8px;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn-primary:hover {
-    background-color: #6b4e31;
-    border-color: #6b4e31;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background-color: #6b4e31;
-    border-color: #6b4e31;
-    border-radius: 8px;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn-secondary:hover {
-    background-color: #8c6b47;
-    border-color: #8c6b47;
-    transform: translateY(-2px);
-}
+@keyframes halo { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.1);opacity:.9} }
 
 .stat-card {
-    border: 1px solid #6b4e31;
-    border-radius: 10px;
-    padding: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; padding: 1.5rem; text-align: center;
+    box-shadow: 0 10px 30px rgba(212,160,23,0.2);
+    transition: all 0.4s ease; border: 1px solid rgba(212,160,23,0.3);
+}
+.stat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(212,160,23,0.4); }
+.stat-number { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 700; color: var(--gold-dark); }
+
+.reading-card {
+    background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+    border-radius: 20px; padding: 1.5rem; box-shadow: var(--shadow);
+    transition: all 0.4s ease; border-left: 5px solid var(--gold);
+}
+.reading-card:hover { transform: translateX(10px); box-shadow: 0 15px 35px rgba(212,160,23,0.3); }
+
+.progress { height: 28px; border-radius: 14px; background: rgba(212,160,23,0.2); overflow: hidden; }
+.progress-bar { background: linear-gradient(90deg, var(--gold), #ffd54f); font-weight: 700; }
+
+.btn-faith {
+    background: linear-gradient(45deg, var(--gold), #ffd54f);
+    color: #3e2723; border: none; border-radius: 50px; padding: 0.8rem 2rem; font-weight: 700;
+    box-shadow: 0 10px 30px rgba(212,160,23,0.4); transition: all 0.4s ease;
+}
+.btn-faith:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(212,160,23,0.6); }
+
+.modal-content {
+    background: rgba(255,250,243,0.98); backdrop-filter: blur(12px);
+    border: 2px solid var(--gold); border-radius: 24px; box-shadow: 0 20px 60px rgba(212,160,23,0.4);
+}
+.modal-header { border-bottom: 2px solid var(--gold); }
+
+footer {
+    background: rgba(78, 52, 46, 0.95);
+    color: #ffd54f;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 5rem;
 }
 
-.stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.text-muted {
-    color: #6b4e31 !important;
-    font-size: 0.9rem;
-}
-
-.profile-imagem-primary {
-    position: relative;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-}
-
-.profile-imagem-primary img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 12px;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    filter: brightness(0.95);
-}
-
-.profile-imagem-primary.hidden img {
-    max-height: 0;
-    opacity: 0;
-}
-
-.profile-info img.rounded-circle {
-    object-fit: cover;
-    border: 3px solid #6b4e31;
-    transition: transform 0.3s ease;
-}
-
-.profile-info img.rounded-circle:hover {
-    transform: scale(1.05);
-}
-
-.modal-body input.form-control {
-    margin-bottom: 1rem;
-    border: 1px solid #6b4e31;
-    border-radius: 6px;
-    padding: 0.75rem;
-    font-size: 1rem;
-}
-
-.modal-body input.form-control:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-}
-
-.openbtn {
-    margin-left: 15px;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background 0.3s ease;
-}
-
-.openbtn:hover {
-    background-color: rgba(107, 78, 49, 0.2);
-}
-
-
-
-.card-reading {
-    transition: transform 0.2s;
-}
-.card-reading:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-
-.progress {
-    height: 22px;
-    border-radius: 12px;
-    background-color: #e9ecef;
-}
-.progress-bar {
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+.profile-banner.collapsed { max-height: 0; opacity: 0; padding: 0; margin: 0; }

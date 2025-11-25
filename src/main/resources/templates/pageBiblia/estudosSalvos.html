@@ -4,155 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Estudos Salvos - Caminho da Fé</title>
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Georgia&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/biblia/estudoSalvos.css}">
 
-    <link rel="stylesheet" th:href="@{/biblia/biblioteca.css}">
-    <link rel="stylesheet" th:href="@{/css/profile.css}">
     <style>
-        h1, h4, h5 {
-            color: #4a2c0b !important;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .conteudo {
-            margin-top: 90px;
-        }
-
-        .estudo-card {
-            background: #fffef9;
-            border-left: 5px solid #d4a017;
-            border-radius: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .estudo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .estudo-card .card-title {
-            font-size: 1.3rem;
-            color: #4a2c0b;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .estudo-card .card-text {
-            font-size: 1rem;
-            color: #333;
-            text-align: justify;
-            white-space: pre-wrap;
-        }
-
-        .btn-voltar {
-            background-color: #ffb300;
-            color: #4e342e;
-            border: none;
-            transition: 0.3s ease;
-        }
-
-        .btn-voltar:hover {
-            background-color: #ffa000;
-            color: white;
-        }
-
-        footer {
-            background-color: #fff3cd;
-            color: #5d4037;
-        }
-
 
     </style>
 </head>
 <body>
 
+<div id="particles-js"></div>
+
 <div class="container-fluid p-0">
 
-
-    <header class="d-flex justify-content-between align-items-center py-3 text-white fixed-top px-3 shadow">
-        <button class="btn text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu">
-            <span class="material-symbols-outlined">menu</span>
+    <header class="d-flex justify-content-between align-items-center py-3 text-white fixed-top px-4">
+        <button class="btn text-white fs-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu">
+            <span class="material-symbols-rounded">menu</span>
         </button>
         <a th:href="@{/profile}">
-            <img class="rounded-circle"
+            <img class="rounded-circle border border-4 border-warning shadow-lg"
                  th:src="'data:image/jpeg;base64,' + ${profile.avatar64}"
-                 style="width:35px;height:35px;border:2px solid #fff"
-                 onerror="this.src='https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg';">
+                 style="width: 50px; height: 50px; object-fit: cover;" alt="Perfil"
+                 onerror="this.src='https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=740';"
+            >
         </a>
     </header>
 
-
-    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="menu" aria-labelledby="menuLabel">
-        <div class="offcanvas-header text-center ">
-            <h5 id="menuLabel " class="text-white">Caminho da Fé</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    <div class="offcanvas offcanvas-start text-white" tabindex="-1" id="menu">
+        <div class="offcanvas-header justify-content-center border-bottom border-warning border-3">
+            <h5 class="fw-bold" style="font-family: 'Cinzel', serif; color: var(--gold);">Caminho da Fé</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body custom-offcanvas">
-            <a th:href="@{/biblia/inicio}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">home</span> <span class="text">Início</span>
+        <div class="offcanvas-body pt-4">
+            <a th:href="@{/biblia/inicio}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">home</span> Início
             </a>
-            <a th:href="@{/estudos/salvos}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">book</span> <span class="text">Estudos Salvos</span>
+            <a th:href="@{/estudos/biblicos}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">auto_stories</span> Estudos Bíblicos
             </a>
-            <a th:href="@{/estudos/biblicos}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">book_online</span> <span class="text">Estudos Bíblicos</span>
+            <a th:href="@{/estudos/salvos}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">bookmark</span> Estudos Salvos
             </a>
-            <a th:href="@{/favorites}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">star</span> <span class="text">Versículos Favoritos</span>
+            <a th:href="@{/favorites}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">favorite</span> Favoritos
             </a>
-            <a th:href="@{/biblia/biblioteca}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">bookmark</span> <span class="text">Biblioteca da Fé</span>
+            <a th:href="@{/biblia/biblioteca}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">library_books</span> Biblioteca da Fé
             </a>
-            <a th:href="@{/profile}" class="d-block py-2 text-white text-decoration-none">
-                <span class="material-symbols-outlined">person</span> <span class="text">Meu Perfil</span>
+            <a th:href="@{/comunidade/chat-online}" class="d-block text-white text-decoration-none active">
+                <span class="material-symbols-rounded">chat</span> Conversas
             </a>
-            <a href="#" class="d-block py-2 text-white text-decoration-none" onclick="document.getElementById('logoutForm').submit()">
-                <span class="material-symbols-outlined">logout</span> <span class="text">Sair</span>
+            <a th:href="@{/profile}" class="d-block text-white text-decoration-none">
+                <span class="material-symbols-rounded">person</span> Meu Perfil
+                <span th:if="${unreadMessagesCount != null and unreadMessagesCount > 0}"
+                      class="badge text-bg-danger rounded-pill ms-2"
+                      th:text="${unreadMessagesCount}">
+                </span>
             </a>
-
-            <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            </form>
+            <hr class="border-secondary">
+            <a href="#" class="d-block text-danger text-decoration-none" onclick="document.getElementById('logoutForm').submit()">
+                <span class="material-symbols-rounded">logout</span> Sair
+            </a>
         </div>
     </div>
 
 
-
     <div class="conteudo container mt-5 pt-4">
-        <div class="text-center mb-4">
-            <h1 class="fw-bold">📖 Meus Estudos Salvos</h1>
-            <p class="text-secondary">Encontre aqui as reflexões que você guardou em seu coração.</p>
+        <div class="text-center mb-5" data-aos="fade-down">
+            <h1 class="fw-bold">Meus Estudos Salvos</h1>
+            <p class="text-secondary lead">Encontre aqui as reflexões que você guardou em seu coração.</p>
         </div>
 
-        <div th:if="${#lists.isEmpty(meusEstudos)}" class="alert alert-light text-muted text-center">
-            Nenhum estudo salvo ainda.
+        <div th:if="${#lists.isEmpty(meusEstudos)}" class="alert alert-light text-center" data-aos="fade-up">
+            Nenhum estudo salvo ainda. Vá gerar um agora mesmo!
         </div>
 
-        <div th:each="e : ${meusEstudos}" class="card mb-4 estudo-card">
+        <div th:each="e : ${meusEstudos}" class="estudo-card" data-aos="fade-up" data-aos-delay="100">
             <div class="card-body">
                 <h4 class="card-title" th:text="${e.tema}"></h4>
                 <pre class="card-text" th:text="${e.mensagem}"></pre>
             </div>
         </div>
 
-        <div class="text-center mt-4">
-            <a th:href="@{/estudos/biblicos}" class="btn btn-voltar rounded-pill px-4">
-                <span class="material-symbols-outlined align-middle">arrow_back</span>
-                Voltar aos estudos
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="200">
+            <a th:href="@{/estudos/biblicos}" class="btn btn-voltar rounded-pill px-5">
+                <span class="material-symbols-rounded align-middle">arrow_back</span>
+                Voltar aos Estudos Bíblicos
             </a>
         </div>
     </div>
 
-
-    <footer class="text-center py-3 mt-5">
-        <p>&copy; 2025 Caminho da Fé — Inspirando sua jornada espiritual</p>
+    <footer>
+        <p>“Guarda no teu coração as minhas palavras; guarda os meus mandamentos e vive.” (Provérbios 4:4)</p>
+        <p>&copy; 2025 Caminho da Fé — Inspirando sua jornada espiritual com a Palavra Viva</p>
     </footer>
 </div>
 
+<form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+</form>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 65 },
+            color: { value: "#d4a017" },
+            size: { value: 3 },
+            move: { speed: 0.6 },
+            opacity: { value: 0.7 }
+        },
+        interactivity: {
+            events: { onhover: { enable: true, mode: "repulse" } }
+        }
+    });
+</script>
 
 </body>
 </html>

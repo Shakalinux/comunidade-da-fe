@@ -1,10 +1,7 @@
 package com.shakalinux.biblia.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
@@ -12,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @Entity
+@Data
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

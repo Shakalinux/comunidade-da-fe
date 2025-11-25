@@ -140,6 +140,9 @@ public class BibliaService {
     }
 
     public List<Livro> buscarLivrosPorNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return getTodosLivros();
+        }
         return livroRepository.findByNomeContainingIgnoreCase(nome);
     }
 

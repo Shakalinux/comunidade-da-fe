@@ -21,20 +21,24 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/css/**",
-                    "/js/**",
-                    "/images/**",
-                    "/biblia/**",
-                    "/static/**",
-                    "/user/cadastro",
-                    "/user/login",
-                    "/user/verify/**",
-                    "/user/resend-verification",
-                    "/user/forgot-password",
-                    "/user/reset-password",
-                    "/user/reset-password-modal"
+                        "/css/**",
+                        "/js/**",
+                        "/images/**",
+                        "/biblia/**",
+                        "/static/**",
+                        "/user/cadastro",
+                        "/user/login",
+                        "/user/verify/**",
+                        "/user/resend-verification",
+                        "/user/forgot-password",
+                        "/user/reset-password",
+                        "/user/reset-password-modal",
+                        "/ws/**",
+                        "/ws",
+                        "/topic/**",
+                        "/queue/**",
+                        "/app/**"
                 ).permitAll()
-
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
